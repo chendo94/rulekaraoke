@@ -16,7 +16,12 @@
       allowfullscreen>
     </iframe>
   </div>
-  <div class="wheel-overlay hidden">
+  <div class="filter-container">
+    <label for="filterInput">Filtrar por artista o género:</label>
+    <input type="text" id="filterInput" placeholder="Ejemplo: Shakira, Pop, Rock">
+    <button id="applyFilter">Aplicar Filtro</button>
+  </div>
+  <div class="wheel-overlay">
     <div class="wheel">
       <div class="wheel-inner">
         <div class="segment">🎵 1</div>
@@ -27,7 +32,7 @@
         <div class="segment">🎵 6</div>
       </div>
     </div>
-    <button id="spinButton">Girar</button>
+    <button id="spinButton" disabled>Girar</button>
   </div>
   <script src="script.js"></script>
 </body>
