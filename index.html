@@ -16,11 +16,15 @@
       allowfullscreen>
     </iframe>
   </div>
+  
+  <!-- Contenedor de filtro -->
   <div class="filter-container">
     <label for="filterInput">Filtrar por artista o género:</label>
     <input type="text" id="filterInput" placeholder="Ejemplo: Shakira, Pop, Rock">
-    <button id="applyFilter">Aplicar Filtro</button>
+    <button id="applyFilter" aria-label="Aplicar Filtro">Aplicar Filtro</button>
   </div>
+  
+  <!-- Contenedor de la ruleta -->
   <div class="wheel-overlay">
     <div class="wheel">
       <div class="wheel-inner">
@@ -32,14 +36,14 @@
         <div class="segment">🎵 6</div>
       </div>
     </div>
-    <button id="spinButton" disabled>Girar</button>
+    <button id="spinButton" disabled aria-label="Girar Ruleta">Girar</button>
   </div>
 
-   <!-- Footer con enlace a la política de privacidad -->
+  <!-- Footer con enlace a la política de privacidad -->
   <footer>
-    <a href="privacy-policy.html" target="_blank">Política de Privacidad</a>
+    <a href="privacy-policy.html" target="_blank" role="button" aria-label="Política de Privacidad">Política de Privacidad</a>
   </footer>
-  
+
   <script src="script.js"></script>
 </body>
 </html>
