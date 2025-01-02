@@ -1,23 +1,15 @@
 const spinButton = document.getElementById('spinButton');
+const applyFilterButton = document.getElementById('applyFilter');
+const filterInput = document.getElementById('filterInput');
 const youtubePlayer = document.getElementById('youtubePlayer');
-const wheelOverlay = document.querySelector('.wheel-overlay');
+const wheelInner = document.querySelector('.wheel-inner');
 
-// Mostrar/ocultar la ruleta al tocar la pantalla
-document.addEventListener('click', toggleWheel);
-document.addEventListener('touchstart', toggleWheel);
+let currentFilter = 'karaoke'; // Filtro por defecto
 
-function toggleWheel() {
-  if (wheelOverlay.classList.contains('hidden')) {
-    wheelOverlay.classList.remove('hidden'); // Mostrar la ruleta
-  } else {
-    wheelOverlay.classList.add('hidden'); // Ocultar la ruleta
-  }
-}
-
-// Función para buscar videos de karaoke
-const fetchYouTubeVideos = async () => {
+// Función para obtener videos de YouTube con el filtro actual
+async function fetchYouTubeVideos() {
   const apiKey = 'AIzaSyAm_AxD_vEjcaNdXDwhVgJG7Lszqw10yz8'; // Sustituye con tu API Key
-  const query = 'karaoke';
+  const query = `${currentFilter} karaoke`;
   const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${query}&type=video&maxResults=6&key=${apiKey}`;
 
   try {
@@ -30,10 +22,22 @@ const fetchYouTubeVideos = async () => {
       return ['https://www.youtube.com/embed/dQw4w9WgXcQ']; // Video de respaldo
     }
   } catch (error) {
-    console.error('Error al obtener los videos:', error);
+    console.error('Error al obtener videos:', error);
     return ['https://www.youtube.com/embed/dQw4w9WgXcQ']; // Video de respaldo
   }
-};
+}
+
+// Aplica el filtro
+applyFilterButton.addEventListener('click', () => {
+  const filterValue = filterInput.value.trim();
+  if (filterValue) {
+    currentFilter = filterValue;
+    spinButton.disabled = false; // Habilita el botón de la ruleta
+    alert(`Filtro aplicado: ${currentFilter}`);
+  } else {
+    alert('Por favor ingresa un filtro válido.');
+  }
+});
 
 // Manejo del giro de la ruleta
 spinButton.addEventListener('click', async () => {
@@ -41,13 +45,11 @@ spinButton.addEventListener('click', async () => {
   const randomIndex = Math.floor(Math.random() * videos.length);
   const selectedVideo = videos[randomIndex];
 
-  const spins = Math.floor(Math.random() * 5) + 3;
-  const degrees = spins * 360 + randomIndex * 60;
-  document.querySelector('.wheel-inner').style.transition = 'transform 4s ease-out';
-  document.querySelector('.wheel-inner').style.transform = `rotate(${degrees}deg)`;
+  const spins = Math.floor(Math.random() * 5) + 3; // Entre 3 y 7 giros
+  const degrees = spins * 360 + randomIndex * 60; // Cada segmento tiene 60 grados
+  wheelInner.style.transform = `rotate(${degrees}deg)`;
 
   setTimeout(() => {
-    youtubePlayer.src = selectedVideo;
-    wheelOverlay.classList.add('hidden'); // Ocultar la ruleta después de usarla
+    youtubePlayer.src = selectedVideo; // Cambia el video
   }, 4000);
 });
