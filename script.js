@@ -8,7 +8,7 @@ let currentFilter = 'karaoke'; // Filtro por defecto
 
 // Función para obtener videos de YouTube con el filtro actual
 async function fetchYouTubeVideos() {
-  const apiKey = 'AIzaSyBqIdiCdkVG2yqcJnBOzDtyzpraFm_fhKk8'; // Sustituye con tu API Key
+  const apiKey = 'AIzaSyBqIdiCdkVG2yqcJnBOzDtyzpraFm_fhKk'; // Sustituye con tu API Key
   const query = `${currentFilter} karaoke`;
   const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${query}&type=video&maxResults=6&key=${apiKey}`;
 
